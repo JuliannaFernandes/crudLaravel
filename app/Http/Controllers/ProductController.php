@@ -37,8 +37,8 @@ class ProductController extends Controller
 
         $product = new Product;
         //salvando imagem em um diretório publico
-        $fileName = time() . '.' . $request->image->getClientOriginalExtension();
-        request()->image->move(public_path('images'),$fileName);
+        $file_name = time() . '.' . $request->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'),$file_name);
 
         //atribuindo os valores ao modelo Product
         $product-> name        = $request->name;
@@ -46,7 +46,7 @@ class ProductController extends Controller
         $product-> category    = $request->category;
         $product-> quantity    = $request->quantity;
         $product-> price       = $request->price;
-        $product-> image       = $fileName;
+        $product-> image       = $file_name;
 
         //salvando no banco de dados
         $product->save();
@@ -55,5 +55,50 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', ('Produto adicionado com sucesso'));
     }
 
+    public function edit($id){
+        $product = Product::findOrFail($id);
+        return view('products.edit', ['product' => $product]);
+    }
+    
+ 
+    public function update(Request $request, Product $product){
+        $request->validate([
+            'name'=> 'required'
+        ]);
+
+        $file_name = $request->hidden_product_image;
+
+        if($request->image != ''){
+            $file_name = time() . '.' . $request->image->getClientOriginalExtension();
+            request()->image->move(public_path('images'),$file_name);
+        }
+
+        $product = Product::find($request->hidden_id);
+
+        $product-> name        = $request->name;
+        $product-> description = $request->description;
+        $product-> category    = $request->category;
+        $product-> quantity    = $request->quantity;
+        $product-> price       = $request->price;
+        $product-> image       = $file_name;
+
+
+        $product->save();
+        return redirect()->route('products.index')->with('success', ('Produto editado com sucesso'));
+    }
+
+    public function destroy($id){
+        $product = Product::findOrFail($id);
+        $image_path = public_path()."/images/";
+        $image = $image_path. $product->image;
+
+        if(file_exists($image)){    
+            @unlink($image);
+
+        }
+        $product->delete();
+        return redirect()->route('products.index')->with('success', ('Produto excluído com sucesso'));
+
+    }
  
 }

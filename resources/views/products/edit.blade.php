@@ -19,34 +19,34 @@
           @endif
             <div class="card">
                <div>
-                    <label>Name</label>
+                    <label>Nome</label>
                     <input type="text" name="name" value="{{$product->name}}">
-                    <label>Description (optional)</label>
+                    <label>Descrição (opcional)</label>
                     <textarea cols="10" rows="5"  name="description" value="{{$product->description}}">{{$product->description}}</textarea>
-                    <label>Add Image</label>
+                    <label for="image">Adicionar imagem</label>
                     <img src="{{ asset('images/'. $product->image)}}" alt="File Preview" class="img-product" id="file-preview" />
                     <input type="hidden" name="hidden product image" value="{{$product->image}}">
-                    <input type="file" name="image" accept="image/*" onchange="showFile(event)" required >
+                    <input type="file" placeholder="Escolher arquivo" name="image" accept="image/*" onchange="showFile(event)" required >
                 </div>
                <div>
-                    <label>Category</label>
+                    <label>Categoria</label>
                     <select  name="category">
                         @foreach(json_decode('{"Smartphone":"Smartphone", "Smart TV":"Smart TV", "Computer": "Computer"}', true) as $optionKey => $optionValue  )
                             <option value="{{$optionKey}}" {{(isset($product->category ) && ($product->category == $optionKey)? 'selected' : '') }}</option>{{$optionValue}}</option>
                         @endforeach
                     </select>
                     <hr>
-                    <label>Inventory</label>
+                    <label>Inventário</label>
                     <input type="text" name="quantity" value="{{$product->quantity}}">
                     <hr>
-                    <label>Price</label>
+                    <label>Preço</label>
                     <input type="text" name="price"  value="{{$product->price}}">
                </div>
             </div>
             <div class="titlebar">
                 <h1></h1>
                 <input type="hidden" name="hidden_id" value="{{$product->id}}" >
-                <button >Save</button>
+                <button >Salvar Alterações</button>
             </div>
         </form>
         </section>

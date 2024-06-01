@@ -4,7 +4,7 @@
 <section>  <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="titlebar">
-                <h1>Add Product</h1>
+                <h1>Cadastrar produto</h1>
             </div>
           @if ($errors->any())
           <div>
@@ -17,32 +17,32 @@
           @endif
             <div class="card">
                <div>
-                    <label>Name</label>
+                    <label>Nome</label>
                     <input type="text" name="name" required>
-                    <label>Description (optional)</label>
+                    <label>Descrição (opcional)</label>
                     <textarea cols="10" rows="5"  name="description"></textarea>
-                    <label>Add Image</label>
+                    <label>Adicionar imagem</label>
                     <img src="" alt="File Preview" class="img-product" id="file-preview" />
                     <input type="file" name="image" accept="image/*" onchange="showFile(event)" required >
                 </div>
                <div>
-                    <label>Category</label>
+                    <label>Categoria</label>
                     <select  name="category">
                         @foreach(json_decode('{"Smartphone":"Smartphone", "Smart TV":"Smart TV", "Computer": "Computer"}', true) as $optionKey => $optionValue  )
                             <option value="{{$optionKey}}">{{$optionValue}}</option>
                         @endforeach
                     </select>
                     <hr>
-                    <label>Inventory</label>
+                    <label>Inventário</label>
                     <input type="text" name="quantity">
                     <hr>
-                    <label>Price</label>
+                    <label>Preço</label>
                     <input type="text" name="price">
                </div>
             </div>
             <div class="titlebar">
                 <h1></h1>
-                <button >Save</button>
+                <button >Cadastrar</button>
             </div>
         </form>
         </section>

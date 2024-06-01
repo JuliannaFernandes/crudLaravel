@@ -1,9 +1,18 @@
 @extends('layouts.app')
 @section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite(['resources/css/app.css','resources/js/app.js'])
+    <title>Produtos</title>
+</head>
+<body>
 <main class="container">
         <section>
             <div class="titlebar">
-                <h1>Products</h1>
+                <h1>Produtos</h1>
         @if($message= Session::get('success'))
            <script type="text/javascript">
                 const Toast = Swal.mixin({
@@ -42,23 +51,23 @@
                     <div class="table-search">   
                         <div>
                             <button class="search-select">
-                            Search Product
+                            Buscar produto
                             </button>
                             <span class="search-select-arrow">
                                 <i class="fas fa-caret-down"></i>
                             </span>
                         </div>
                         <div class="relative">
-                            <input class="search-input" type="text" name="search" placeholder="Search product..." value="{{ request('search') }}">
+                            <input class="search-input" type="text" name="search" placeholder="Buscar produto..." value="{{ request('search') }}">
                         </div>
                     </div>
                 </form>
                 <div class="table-product-head">
-                    <p>Image</p>
-                    <p>Name</p>
-                    <p>Category</p>
-                    <p>Inventory</p>
-                    <p>Actions</p>
+                    <p>Imagem</p>
+                    <p>Nome</p>
+                    <p>Categoria</p>
+                    <p>Inventário</p>
+                    <p>Ações</p>
                 </div>
                 <div class="table-product-body">
                     @if(count ($products) > 0)
@@ -114,5 +123,7 @@
         });
     }
     </script>
+    </body>
+</html>
 @endsection
 

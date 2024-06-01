@@ -1,22 +1,29 @@
 @extends('layouts.app')
 @section('content')
 <main class='container'>
-<section>  <form method="POST" action="{{ route('products.store') }}">
+<section>  <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="titlebar">
                 <h1>Add Product</h1>
-                <button>Save</button>
             </div>
-          
+          @if ($errors->any())
+          <div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+          </div>
+          @endif
             <div class="card">
                <div>
                     <label>Name</label>
-                    <input type="text" name="name">
+                    <input type="text" name="name" required>
                     <label>Description (optional)</label>
                     <textarea cols="10" rows="5"  name="description"></textarea>
                     <label>Add Image</label>
-                    <img src="" alt="File Preview" class="img-product" id="file-preview"/>
-                    <input type="file" name="image" accept="image/*" onchange="showFile(event)" >
+                    <img src="" alt="File Preview" class="img-product" id="file-preview" />
+                    <input type="file" name="image" accept="image/*" onchange="showFile(event)" required >
                 </div>
                <div>
                     <label>Category</label>
@@ -33,11 +40,11 @@
                     <input type="text" name="price">
                </div>
             </div>
-        </form>
             <div class="titlebar">
                 <h1></h1>
-                <button>Save</button>
+                <button >Save</button>
             </div>
+        </form>
         </section>
 
         <script>

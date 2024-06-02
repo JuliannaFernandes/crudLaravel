@@ -13,30 +13,29 @@
         <section>
             <div class="titlebar">
                 <h1>Produtos</h1>
-        @if($message= Session::get('success'))
-           <script type="text/javascript">
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                 });
-                Toast.fire({
-                    icon: "success",
-                    title: "Cadastrado com sucesso"
-                });
-            </script>
-        @else
-
-        @endif
-                
-<a href="{{ route('products.create')}}" class="btn-link">Adicionar Produto</a>
+                @if($message= Session::get('success'))
+                <script type="text/javascript">
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: "Cadastrado com sucesso"
+                    });
+                </script>
+                @else
+                @endif             
+                <a href="{{ route('products.create')}}" class="btn-link">Adicionar Produto</a>
             </div>
+
             <div class="table">
                 <div class="table-filter">
                     <div>   
@@ -47,11 +46,12 @@
                         </ul>
                     </div>
                 </div>
+
                 <form action="{{route('products.index')}}" method="GET" accept-charset="UTF-8" role=""search>
                     <div class="table-search">   
                         <div>
                             <button class="search-select">
-                            Buscar produto
+                                Buscar produto
                             </button>
                             <span class="search-select-arrow">
                                 <i class="fas fa-caret-down"></i>
@@ -62,6 +62,7 @@
                         </div>
                     </div>
                 </form>
+
                 <div class="table-product-head">
                     <p>Imagem</p>
                     <p>Nome</p>
@@ -69,6 +70,7 @@
                     <p>Inventário</p>
                     <p>Ações</p>
                 </div>
+
                 <div class="table-product-body">
                     @if(count ($products) > 0)
                         @foreach($products as $product)
@@ -76,26 +78,25 @@
                     <p>{{$product->name}}</p>
                     <p>{{$product->category}}</p>
                     <p>{{$product->quantity}}</p>
-                    <div>     
+                    <div class="actions-btn">
                         <a href="{{route('products.edit', $product->id)}}" class="btn-link btn btn-success" >
-                            <i class="fas fa-pencil-alt" ></i> 
+                            <i class="fas fa-pencil-alt"></i>
                         </a>
-                       <form action="{{route('products.destroy', $product->id)}}" method="POST"> 
-                        @method('DELETE')
-                        @csrf
-                            <button class="btn btn-danger" onclick="deleteConfirm(event)" >
+                        <form action="{{route('products.destroy', $product->id)}}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button class="btn btn-danger" onclick="deleteConfirm(event)">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </form>
                     </div>
-                    @endforeach
 
+                    @endforeach
                     @else
                         <p>Produto não encontrado</p>
-
                     @endif
-
                 </div>
+
                 <div class="table-paginate">
                     {{$products->links('layouts.pagination')}}
                 </div>
@@ -123,6 +124,7 @@
         });
     }
     </script>
+
     </body>
 </html>
 @endsection

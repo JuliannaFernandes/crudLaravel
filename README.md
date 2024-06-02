@@ -17,4 +17,3 @@ Este é um projeto básico de um CRUD (Create, Read, Update, Delete) de produtos
 - Laravel 11.x
 - MySQL ou outro banco de dados suportado pelo Laravel
 
-![Aplication](project.png)

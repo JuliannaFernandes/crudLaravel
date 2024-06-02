@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 # Projeto CRUD de Produtos em Laravel
 
@@ -18,7 +17,4 @@ Este é um projeto básico de um CRUD (Create, Read, Update, Delete) de produtos
 - Laravel 11.x
 - MySQL ou outro banco de dados suportado pelo Laravel
 
-## Instalação
-
-1. Clone este repositório:
-   
+![Aplication](project.png)
